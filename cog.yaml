@@ -2,7 +2,7 @@
 build:
   gpu: true
   cuda: "11.8"
-  python_version: "2.0.1"
+  python_version: "3.11"
 
   python_packages:
     - "git+https://github.com/Render-AI/TTS.git"
