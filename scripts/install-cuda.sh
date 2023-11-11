@@ -62,7 +62,7 @@ sudo ldconfig
 # First register here: https://developer.nvidia.com/developer-program/signup
 
 CUDNN_TAR_FILE="cudnn-linux-x86_64-8.7.0.84_cuda11-archive.tar.xz"
-sudo wget https://developer.download.nvidia.com/compute/redist/cudnn/v8.7.0/local_installers/11.8/cudnn-linux-x86_64-8.7.0.84_cuda11-archive.tar.xz
+sudo wget https://developer.download.nvidia.com/compute/redist/cudnn/v8.7.0/local_installers/12.3/cudnn-linux-x86_64-8.7.0.84_cuda11-archive.tar.xz
 sudo tar -xvf ${CUDNN_TAR_FILE}
 sudo mv cudnn-linux-x86_64-8.7.0.84_cuda11-archive cuda
 
