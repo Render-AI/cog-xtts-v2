@@ -1,5 +1,7 @@
 #!/bin/bash
 
+###### Source: https://gist.github.com/MihailCosmin/affa6b1b71b43787e9228c25fe15aeba
+
 ### steps ####
 # verify the system has a cuda-capable gpu
 # download and install the nvidia cuda toolkit and cudnn
@@ -75,24 +77,3 @@ nvcc -V
 
 # install Pytorch (an open source machine learning framework)
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-
-
-
-
-
-###### MORE - see: https://gist.github.com/MihailCosmin/affa6b1b71b43787e9228c25fe15aeba
-
-sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
-sudo apt-get update
-
-#### Added This Line #####
-sudo apt upgrade
-#######################
-
- # installing CUDA-11.8
-sudo apt install cuda-11-8
-
-
-### Instructions
-### Start docker:
-### sudo systemctl start docker
