@@ -50,11 +50,11 @@ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/
 sudo apt update && sudo apt upgrade -y
 
  # installing CUDA-11.8
-sudo apt install cuda-11-8 -y
+sudo apt install cuda-12-3 -y
 
 # setup your paths
-echo 'export PATH=/usr/local/cuda-11.8/bin:$PATH' >> ~/.bashrc
-echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+echo 'export PATH=/usr/local/cuda-12.3/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
 sudo ldconfig
 
@@ -67,9 +67,9 @@ sudo tar -xvf ${CUDNN_TAR_FILE}
 sudo mv cudnn-linux-x86_64-8.7.0.84_cuda11-archive cuda
 
 # copy the following files into the cuda toolkit directory.
-sudo cp -P cuda/include/cudnn.h /usr/local/cuda-11.8/include
-sudo cp -P cuda/lib/libcudnn* /usr/local/cuda-11.8/lib64/
-sudo chmod a+r /usr/local/cuda-11.8/lib64/libcudnn*
+sudo cp -P cuda/include/cudnn.h /usr/local/cuda-12.3/include
+sudo cp -P cuda/lib/libcudnn* /usr/local/cuda-12.3/lib64/
+sudo chmod a+r /usr/local/cuda-12.3/lib64/libcudnn*
 
 # Finally, to verify the installation, check
 nvidia-smi
