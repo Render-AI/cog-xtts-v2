@@ -1,10 +1,12 @@
 # Configuration for Cog ⚙️
 build:
-  gpu: true
-  cuda: "11.8"
-  python_version: "3.11"
+ gpu: false
+  python_version: "3.9" # updated from 3.8 to 3.9 to meet the TTS package Python version requirement
+  system_packages:
+    - "git"
+    - "gcc" # added gcc to system packages to resolve the build error
 
   python_packages:
-    - "git+https://github.com/coqui-ai/TTS.git"
-
+    - "git+https://github.com/Coqui-AI/TTS.git@main"
+    
 predict: "predict.py:Predictor"
