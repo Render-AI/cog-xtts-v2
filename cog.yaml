@@ -5,6 +5,6 @@ build:
   python_version: "3.11"
 
   python_packages:
-    - "git+https://github.com/Render-AI/TTS.git"
+    - "git+https://github.com/Coqui-AI/TTS.git"
 
 predict: "predict.py:Predictor"
