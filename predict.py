@@ -34,8 +34,11 @@ class Predictor(BasePredictor):
             default=False),
         cleanup_output: bool = Input(
             description="Whether to apply additional processing to the output audio (microphone recordings)",
-            default=False
-        ),
+            default=False),
+        cleanup_output_mode: int = Input(
+            description="Output processing mode",
+            choices=[0, 1, 2],
+            default=0),
     ) -> Path:
         """Run a single prediction on the model"""
         speaker_wav = speaker
@@ -65,9 +68,9 @@ class Predictor(BasePredictor):
             y, sr = torchaudio.load('/tmp/output.wav')
             if y.size(0) > 1:  # mix to mono
                 y = y.mean(dim=0, keepdim=True)
-            y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=44100)
+            y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=22050)
             y_hat = vocos(y)
-            torchaudio.save("output.wav", y_hat, 44100)
+            torchaudio.save("output.wav", y_hat, 22050)
 
             # get the current working directory
             current_working_directory = os.getcwd()
@@ -84,7 +87,7 @@ class Predictor(BasePredictor):
                 output=os.path.join(current_working_directory,
                                     "output-cleaned.wav"),  # save file path
                 cuda=True,  # GPU acceleration
-                mode=1
+                mode=cleanup_output_mode
             )
             # return ModelOutput(audio_out=Path('output.wav'))
             return Path('output-cleaned.wav')
