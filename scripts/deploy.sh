@@ -2,6 +2,7 @@
 
 # cog push
 cd cog-xtts-v2
-bash cog-xtts-v2/scripts/setup-docker.sh
-bash cog-xtts-v2/scripts/start-docker.sh
+sudo groupadd docker
+sudo chmod 666 /var/run/docker.sock
+sudo systemctl start docker
 cog push r8.im/platform-kit/xtts
