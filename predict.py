@@ -1,12 +1,11 @@
 # Prediction interface for Cog
-from cog import BasePredictor, Input, Path
+from cog import BasePredictor, Input, Path, BaseModel
 import os
 from TTS.api import TTS
 
 
 class ModelOutput(BaseModel):
     audio_out: Path
-
 
 class Predictor(BasePredictor):
     def setup(self) -> None:
@@ -56,8 +55,7 @@ class Predictor(BasePredictor):
         )
 
         if cleanup_output is not False:
-            # see: https://github.com/gemelo-ai/vocos
-            import torch
+            # see: https://github.com/gemelo-ai/vocos            
             import torchaudio
             from vocos import Vocos
 
