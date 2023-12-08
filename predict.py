@@ -124,7 +124,7 @@ class Predictor(BasePredictor):
             speed=output_speaking_rate,
             enable_text_splitting=enable_text_splitting,
             gpt_cond_len=gpt_cond_len,
-            max_ref_len=max_ref_len
+            # max_ref_len=max_ref_len
         )
 
         if cleanup_output is not False:
