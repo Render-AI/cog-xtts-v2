@@ -67,8 +67,7 @@ class Predictor(BasePredictor):
             y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=44100)
             y_hat = vocos(y)
             torchaudio.save("output.wav", y_hat, 44100)
-
-            import os
+            
             # get the current working directory
             current_working_directory = os.getcwd()
 
