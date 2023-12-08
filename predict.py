@@ -32,6 +32,9 @@ class Predictor(BasePredictor):
         cleanup_voice: bool = Input(
             description="Whether to apply denoising to the input audio (good for laptop/phone recordings)",
             default=False),
+        normalize_voice: bool = Input(
+            description=" Whether to normalize the conditioning audio.",
+            default=False),            
         cleanup_output: bool = Input(
             description="Whether to apply additional processing to the output audio (microphone recordings)",
             default=False),
@@ -62,7 +65,17 @@ class Predictor(BasePredictor):
             description="Higher value produces more unexpected outputs.",
             ge=1, # GE = min value (Greater than, or Equal to)            
             default=0.85,            
-        ),    
+        ),   
+        gpt_cond_len:  float = Input(
+            description="Secs audio to be used as conditioning for the autoregressive model.",
+            ge=6, # GE = min value (Greater than, or Equal to)            
+            default=12,            
+        ),   
+        max_ref_len:  float = Input(
+            description=" Maximum number of seconds of audio to be used as conditioning for the decoder.",
+            ge=6, # GE = min value (Greater than, or Equal to)            
+            default=30,            
+        ),   
         output_length_penalty: float = Input(
             description="Higher value causes the model to produce more short/terse outputs.",
             ge=0.1, # GE = min value (Greater than, or Equal to)
@@ -109,7 +122,9 @@ class Predictor(BasePredictor):
             top_k=output_top_k,
             repetition_penalty=output_repetition_penalty,
             speed=output_speaking_rate,
-            enable_text_splitting=enable_text_splitting
+            enable_text_splitting=enable_text_splitting,
+            gpt_cond_len=gpt_cond_len,
+            max_ref_len=max_ref_len
         )
 
         if cleanup_output is not False:
