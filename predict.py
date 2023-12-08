@@ -22,7 +22,10 @@ class Predictor(BasePredictor):
             default="en"
         ),
         cleanup_voice: bool = Input(
-            description="Whether to apply denoising to the speaker audio (microphone recordings)",
+            description="Whether to apply denoising to the input audio (good for laptop/phone recordings)",
+            default=False),
+        cleanup_output: bool = Input(
+            description="Whether to apply additional processing to the output audio (microphone recordings)",
             default=False
         ),
     ) -> Path:
@@ -42,5 +45,20 @@ class Predictor(BasePredictor):
             speaker_wav = speaker_wav,
             language = language
         )
+
+        if cleanup_output is not False:
+            # see: https://github.com/gemelo-ai/vocos
+            import torch
+            import torchaudio
+            from vocos import Vocos
+            
+            vocos = Vocos.from_pretrained("charactr/vocos-mel-24khz")            
+            
+            y, sr = torchaudio.load('/tmp/output.wav')
+            if y.size(0) > 1:  # mix to mono
+                y = y.mean(dim=0, keepdim=True)
+            y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=24000)
+            y_hat = vocos(y) 
+            torchaudio.save("output.mp3", y_hat, 44100, compression=320)
 
         return Path(path)
