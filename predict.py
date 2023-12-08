@@ -39,6 +39,10 @@ class Predictor(BasePredictor):
             description="Output processing mode",
             choices=[0, 1, 2],
             default=0),
+        output_sample_rate: int = Input(
+            description="Output sample rate.",
+            choices=[22050, 44100, 48000],
+            default=0),            
     ) -> Path:
         """Run a single prediction on the model"""
         speaker_wav = speaker
@@ -68,9 +72,9 @@ class Predictor(BasePredictor):
             y, sr = torchaudio.load('/tmp/output.wav')
             if y.size(0) > 1:  # mix to mono
                 y = y.mean(dim=0, keepdim=True)
-            y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=22050)
+            y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=output_sample_rate)
             y_hat = vocos(y)
-            torchaudio.save("output.wav", y_hat, 22050)
+            torchaudio.save("output.wav", y_hat, output_sample_rate)
 
             # get the current working directory
             current_working_directory = os.getcwd()
