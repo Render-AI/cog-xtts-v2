@@ -7,6 +7,7 @@ from TTS.api import TTS
 class ModelOutput(BaseModel):
     audio_out: Path
 
+
 class Predictor(BasePredictor):
     def setup(self) -> None:
         """Load the model into memory to make running multiple predictions efficient"""
@@ -55,7 +56,7 @@ class Predictor(BasePredictor):
         )
 
         if cleanup_output is not False:
-            # see: https://github.com/gemelo-ai/vocos            
+            # see: https://github.com/gemelo-ai/vocos
             import torchaudio
             from vocos import Vocos
 
@@ -67,7 +68,7 @@ class Predictor(BasePredictor):
             y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=44100)
             y_hat = vocos(y)
             torchaudio.save("output.wav", y_hat, 44100)
-            
+
             # get the current working directory
             current_working_directory = os.getcwd()
 
@@ -77,18 +78,14 @@ class Predictor(BasePredictor):
             # Mode 0: Original Model (suggested by default)
             # Mode 1: Add preprocessing module (remove higher frequency)
             # Mode 2: Train mode (might work sometimes on seriously degraded real speech)
-            for mode in [0,1,2]:
-                print("Testing mode",mode)
-                voicefixer.restore(
-                    input=os.path.join(current_working_directory,"output.wav"), # low quality .wav/.flac file
-                    output=os.path.join(current_working_directory,"output-cleaned.wav"), # save file path
-                    cuda=True, # GPU acceleration
-                    mode=mode
-                )
-                if (mode != 2):
-                    check("output_mode_" + str(mode) + ".flac")
-                print("Pass")
-            
+            voicefixer.restore(
+                # low quality .wav/.flac file
+                input=os.path.join(current_working_directory, "output.wav"),
+                output=os.path.join(current_working_directory,
+                                    "output-cleaned.wav"),  # save file path
+                cuda=True,  # GPU acceleration
+                mode=1
+            )
             # return ModelOutput(audio_out=Path('output.wav'))
             return Path('output-cleaned.wav')
 
