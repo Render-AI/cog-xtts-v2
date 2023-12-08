@@ -55,12 +55,12 @@ class Predictor(BasePredictor):
         ),    
         output_top_k: float = Input(
             description="Higher value produces more unexpected outputs.",
-            ge=0.1, # GE = min value (Greater than, or Equal to)            
-            default=0.65,            
+            ge=1, # GE = min value (Greater than, or Equal to)            
+            default=50,            
         ),    
         output_top_p: float = Input(
             description="Higher value produces more unexpected outputs.",
-            ge=0.1, # GE = min value (Greater than, or Equal to)            
+            ge=1, # GE = min value (Greater than, or Equal to)            
             default=50,            
         ),    
         output_length_penalty: float = Input(
