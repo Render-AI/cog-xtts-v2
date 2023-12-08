@@ -46,8 +46,38 @@ class Predictor(BasePredictor):
             description="Output speaking rate.",
             ge=0.1, # GE = min value (Greater than, or Equal to)
             le=2, # LE = max value (Less than, or Equal to)
-            default=1,
-        ),            
+            default=1,),
+        output_temperature: float = Input(
+            description="Higher temperature produces more diversity / more unexpected outputs.",
+            ge=0.1, # GE = min value (Greater than, or Equal to)
+            le=10, # LE = max value (Less than, or Equal to)
+            default=0.65,            
+        ),    
+        output_top_k: float = Input(
+            description="Higher value produces more unexpected outputs.",
+            ge=0.1, # GE = min value (Greater than, or Equal to)            
+            default=0.65,            
+        ),    
+        output_top_p: float = Input(
+            description="Higher value produces more unexpected outputs.",
+            ge=0.1, # GE = min value (Greater than, or Equal to)            
+            default=50,            
+        ),    
+        output_length_penalty: float = Input(
+            description="Higher value causes the model to produce more short/terse outputs.",
+            ge=0.1, # GE = min value (Greater than, or Equal to)
+            le=10, # LE = max value (Less than, or Equal to)
+            default=1,            
+        ),    
+        output_repetition_penalty: float = Input(
+            description="Repetition penalty (prevents long pauses and repetition of sounds like 'umm' and 'ahh').",
+            ge=0.1, # GE = min value (Greater than, or Equal to)
+            le=10, # LE = max value (Less than, or Equal to)
+            default=2,            
+        ),     
+        enable_text_splitting: bool = Input(
+            description="Whether to split the text into sentences and generate audio for each sentence. It allows you to have infinite input length but might loose important context between sentences.",
+            default=False),       
         output_sample_rate: int = Input(
             description="Output sample rate.",
             choices=[22050, 24000, 44100, 48000],
@@ -73,7 +103,13 @@ class Predictor(BasePredictor):
             file_path="/tmp/output.wav",
             speaker_wav=speaker_wav,
             language=language,
-            speed=output_speaking_rate
+            length_penalty=output_length_penalty,
+            temperature=output_temperature,
+            top_p=output_top_p,
+            top_k=output_top_k,
+            repetition_penalty=output_repetition_penalty,
+            speed=output_speaking_rate,
+            enable_text_splitting=enable_text_splitting
         )
 
         if cleanup_output is not False:
