@@ -72,7 +72,7 @@ class Predictor(BasePredictor):
             text=text,
             file_path="/tmp/output.wav",
             speaker_wav=speaker_wav,
-            language=language
+            language=language,
             speed=output_speaking_rate
         )
 
