@@ -72,7 +72,8 @@ class Predictor(BasePredictor):
             y, sr = torchaudio.load('/tmp/output.wav')
             if y.size(0) > 1:  # mix to mono
                 y = y.mean(dim=0, keepdim=True)
-            y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=output_sample_rate)
+            if(sr != output_sample_rate)
+                y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=output_sample_rate)
             y_hat = vocos(y)
             torchaudio.save("output.wav", y_hat, output_sample_rate)
 
