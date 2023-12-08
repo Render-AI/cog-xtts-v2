@@ -9,5 +9,6 @@ build:
     - "git+https://github.com/coqui-ai/TTS.git"
     - "vocos"
     - "voicefixer2"
+    - "pydub"
 
 predict: "predict.py:Predictor"
