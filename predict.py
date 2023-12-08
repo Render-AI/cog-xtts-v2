@@ -59,12 +59,12 @@ class Predictor(BasePredictor):
         output_top_k: int = Input(
             description="Higher value produces more unexpected outputs.",
             ge=1, # GE = min value (Greater than, or Equal to)            
-            default=50,            
+            default=35,            
         ),    
         output_top_p: float = Input(
             description="Higher value produces more unexpected outputs.",
             ge=1, # GE = min value (Greater than, or Equal to)            
-            default=0.85,            
+            default=0.5,            
         ),   
         gpt_cond_len:  float = Input(
             description="Secs audio to be used as conditioning for the autoregressive model.",
