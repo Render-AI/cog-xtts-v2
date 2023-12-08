@@ -123,7 +123,7 @@ class Predictor(BasePredictor):
             repetition_penalty=output_repetition_penalty,
             speed=output_speaking_rate,
             enable_text_splitting=enable_text_splitting,
-            gpt_cond_len=gpt_cond_len,
+            # gpt_cond_len=gpt_cond_len,
             # max_ref_len=max_ref_len
         )
 
