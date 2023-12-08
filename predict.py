@@ -53,7 +53,7 @@ class Predictor(BasePredictor):
             le=10, # LE = max value (Less than, or Equal to)
             default=0.65,            
         ),    
-        output_top_k: float = Input(
+        output_top_k: int = Input(
             description="Higher value produces more unexpected outputs.",
             ge=1, # GE = min value (Greater than, or Equal to)            
             default=50,            
@@ -61,7 +61,7 @@ class Predictor(BasePredictor):
         output_top_p: float = Input(
             description="Higher value produces more unexpected outputs.",
             ge=1, # GE = min value (Greater than, or Equal to)            
-            default=50,            
+            default=0.85,            
         ),    
         output_length_penalty: float = Input(
             description="Higher value causes the model to produce more short/terse outputs.",
