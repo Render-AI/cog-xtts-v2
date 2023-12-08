@@ -7,5 +7,6 @@ build:
   python_version: "3.11"
   python_packages:
     - "git+https://github.com/coqui-ai/TTS.git"
+    - "vocos"
 
 predict: "predict.py:Predictor"
