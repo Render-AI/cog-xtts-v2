@@ -71,7 +71,7 @@ class Predictor(BasePredictor):
             ge=6, # GE = min value (Greater than, or Equal to)            
             default=12,            
         ),   
-        max_ref_len:  float = Input(
+        max_ref_len:  int = Input(
             description=" Maximum number of seconds of audio to be used as conditioning for the decoder.",
             ge=6, # GE = min value (Greater than, or Equal to)            
             default=30,            
