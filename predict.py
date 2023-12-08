@@ -42,7 +42,7 @@ class Predictor(BasePredictor):
             description="Output processing mode",
             choices=[0, 1, 2],
             default=0),                  
-        output_speaking_rate: int = Input(
+        output_speaking_rate: float = Input(
             description="Output speaking rate.",
             ge=0.1, # GE = min value (Greater than, or Equal to)
             le=2, # LE = max value (Less than, or Equal to)
