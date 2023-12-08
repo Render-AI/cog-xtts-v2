@@ -67,10 +67,11 @@ class Predictor(BasePredictor):
             y = torchaudio.functional.resample(y, orig_freq=sr, new_freq=48000)
             y_hat = vocos(y)
             torchaudio.save("output.mp3", y_hat, 48000, compression=128)
-
-            # return Path(path)
-            return ModelOutput(audio_out=Path('output.mp3'))
+            
+            # return ModelOutput(audio_out=Path('output.mp3'))
+            return Path('output.mp3')
 
         else:
             # return Path(path)
-            return ModelOutput(audio_out=Path('/tmp/output.wav'))
+            # return ModelOutput(audio_out=Path('/tmp/output.wav'))
+            return Path('/tmp/output.wav')
