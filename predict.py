@@ -51,7 +51,7 @@ class Predictor(BasePredictor):
         output_sample_rate: int = Input(
             description="Output sample rate.",
             choices=[22050, 24000, 44100, 48000],
-            default=0),           
+            default=24000),           
         output_format: str = Input(
             description="Output format",
             choices=["wav", "mp3"],
