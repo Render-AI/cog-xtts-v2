@@ -8,5 +8,6 @@ build:
   python_packages:
     - "git+https://github.com/coqui-ai/TTS.git"
     - "vocos"
+    - "voicefixer2"
 
 predict: "predict.py:Predictor"
