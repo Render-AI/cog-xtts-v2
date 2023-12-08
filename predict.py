@@ -28,7 +28,7 @@ class Predictor(BasePredictor):
             choices=["en", "es", "fr", "de", "it", "pt", "pl", "tr",
                      "ru", "nl", "cs", "ar", "zh", "hu", "ko", "hi"],
             default="en"
-        ),
+        ),        
         cleanup_voice: bool = Input(
             description="Whether to apply denoising to the input audio (good for laptop/phone recordings)",
             default=False),
@@ -41,7 +41,13 @@ class Predictor(BasePredictor):
         cleanup_output_mode: int = Input(
             description="Output processing mode",
             choices=[0, 1, 2],
-            default=0),
+            default=0),                  
+        output_speaking_rate: int = Input(
+            description="Output speaking rate.",
+            ge=0.1, # GE = min value (Greater than, or Equal to)
+            le=2, # LE = max value (Less than, or Equal to)
+            default=1,
+        ),            
         output_sample_rate: int = Input(
             description="Output sample rate.",
             choices=[22050, 24000, 44100, 48000],
@@ -67,6 +73,7 @@ class Predictor(BasePredictor):
             file_path="/tmp/output.wav",
             speaker_wav=speaker_wav,
             language=language
+            speed=output_speaking_rate
         )
 
         if cleanup_output is not False:
