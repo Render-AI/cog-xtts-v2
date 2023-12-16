@@ -1,5 +1,5 @@
 from cog import BasePredictor, File
 import io
 
-def train(param: str) -> File:
-    return io.StringIO("hello " + param)
+def train(out_path: Input('out_path', default="/tmp")) -> File:
+    return io.StringIO("hello " + out_path)
