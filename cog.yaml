@@ -10,5 +10,8 @@ build:
     - "vocos"
     - "voicefixer2"
     - "pydub"
+  run:
+    - echo 'Setting up XTTS...'
 
 predict: "predict.py:Predictor"
+train: "train.py:train"
