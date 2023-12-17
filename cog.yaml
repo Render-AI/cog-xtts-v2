@@ -10,6 +10,15 @@ build:
     - "vocos"
     - "voicefixer2"
     - "pydub"
+    - "logging"
+    - "os"
+    - "sys"
+    - "librosa.display"
+    - "numpy"
+    - "os"
+    - "torch"
+    - "torchaudio"
+    - "traceback"
   run:
     - echo 'Setting up XTTS...'
 
