@@ -5,7 +5,7 @@ import argparse
 import os
 import sys
 import tempfile
-import librosa.display
+import librosa
 import numpy as np
 import os
 import torch
