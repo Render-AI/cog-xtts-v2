@@ -1,4 +1,4 @@
-from cog import BasePredictor, File
+from cog import BasePredictor, File, Input, Path
 import io
 
 def train(out_path: Input('out_path', default="/tmp")) -> File:
