@@ -2,5 +2,6 @@ __pycache__
 .cog
 TTS
 .env
-/tmp
+/temp/*
+!/temp/readme.md
 *.DS_Store
