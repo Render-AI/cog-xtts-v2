@@ -1,10 +1,13 @@
-from cog import BasePredictor, File, Input, Path
-import io
+from cog import BaseModel, Input, Path
 
 class TrainingOutput(BaseModel):
-    # weights: Path
-    out_path: str
+    weights: Path
 
-def train(out_path: Input('out_path', default="/temp")) -> File:
-    # return io.StringIO("hello " + out_path)
-    return TrainingOutput(out_path=Path(out_path))
+def train(
+    prefix: str = Input(description="data you wish to save"),
+) -> TrainingOutput:
+    weights = Path("output.txt")
+    with open(weights, "w") as f:
+        f.write(prefix)
+
+    return TrainingOutput(weights=weights)
