@@ -10,7 +10,7 @@ build:
     - "vocos"
     - "voicefixer2"
     - "pydub"          
-    - "librosa.display"
+    - "librosa"
     - "numpy"    
     - "torch"
     - "torchaudio"
