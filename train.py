@@ -2,7 +2,6 @@ from cog import BaseModel, Input, Path, File
 import logging
 import io
 import argparse
-import os
 import sys
 import tempfile
 import librosa

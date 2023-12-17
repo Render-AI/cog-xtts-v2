@@ -19,6 +19,7 @@ build:
     - "torch"
     - "torchaudio"
     - "traceback"
+    - "tempfile"
   run:
     - echo 'Setting up XTTS...'
 
