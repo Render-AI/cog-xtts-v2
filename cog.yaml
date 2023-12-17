@@ -13,9 +13,7 @@ build:
     - "librosa"
     - "numpy"    
     - "torch"
-    - "torchaudio"
-    - "traceback"
-    - "tempfile"
+    - "torchaudio"        
   run:
     - echo 'Setting up XTTS...'
 
