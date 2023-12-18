@@ -14,7 +14,8 @@ build:
     - "numpy"    
     - "torch"
     - "torchaudio"
-    - "faster_whisper"
+    - "faster_whisper"    
+    - "argparse"
   run:
     - echo 'Setting up XTTS...'
 
