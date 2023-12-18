@@ -18,7 +18,7 @@ from trainers.xtts_config import XttsConfig
 from trainers.xtts import Xtts
 
 
-class TrainingOutput(BaseModel):    
+class TrainingOutput(BaseModel):
     dataset: Path
 
 
@@ -166,8 +166,38 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+# Dataset
 
-# Implement Gradio Demo as Cog training script
+
+def preprocess_dataset(audio_path, language, out_path, progress=gr.Progress(track_tqdm=True)):
+    clear_gpu_cache()
+    out_path = os.path.join(out_path, "dataset")
+    os.makedirs(out_path, exist_ok=True)
+    if audio_path is None:
+        return "You should provide one or multiple audio files! If you provided it, probably the upload of the files is not finished yet!", "", ""
+    else:
+        try:
+            train_meta, eval_meta, audio_total_size = format_audio_list(
+                audio_path, target_language=language, out_path=out_path, gradio_progress=progress)
+        except:
+            traceback.print_exc()
+            error = traceback.format_exc()
+            return f"The data processing was interrupted due an error !! Please check the console to verify the full error message! \n Error summary: {error}", "", ""
+
+    clear_gpu_cache()
+
+    # if audio total len is less than 2 minutes raise an error
+    if audio_total_size < 120:
+        message = "The sum of the duration of the audios that you provided should be at least 2 minutes!"
+        print(message)
+        return message, "", ""
+
+    print("Dataset Processed!")
+    return "Dataset Processed!", train_meta, eval_meta
+
+# Training Script
+
+
 def train(
         param: str,
         out_path: Input('out_path', default="/tmp/xtts_ft"),
@@ -180,32 +210,6 @@ def train(
         ),
 
 ) -> File:
-    def preprocess_dataset(audio_path, language, out_path, progress=gr.Progress(track_tqdm=True)):
-        clear_gpu_cache()
-        out_path = os.path.join(out_path, "dataset")
-        os.makedirs(out_path, exist_ok=True)
-        if audio_path is None:
-            return "You should provide one or multiple audio files! If you provided it, probably the upload of the files is not finished yet!", "", ""
-        else:
-            try:
-                train_meta, eval_meta, audio_total_size = format_audio_list(
-                    audio_path, target_language=language, out_path=out_path, gradio_progress=progress)
-            except:
-                traceback.print_exc()
-                error = traceback.format_exc()
-                return f"The data processing was interrupted due an error !! Please check the console to verify the full error message! \n Error summary: {error}", "", ""
-
-        clear_gpu_cache()
-
-        # if audio total len is less than 2 minutes raise an error
-        if audio_total_size < 120:
-            message = "The sum of the duration of the audios that you provided should be at least 2 minutes!"
-            print(message)
-            return message, "", ""
-
-        print("Dataset Processed!")
-        return "Dataset Processed!", train_meta, eval_meta
-
     preprocess_dataset(upload_file, lang, out_path)
 
     return TrainingOutput(dataset=Path(out_path))
