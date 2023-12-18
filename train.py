@@ -12,9 +12,9 @@ import librosa
 import numpy as np
 
 from trainers.formatter import format_audio_list
-#from tts.TTS.demos.xtts_ft_demo.utils.gpt_train import train_gpt
-#from tts.TTS.tts.configs.xtts_config import XttsConfig
-#from tts.TTS.tts.models.xtts import Xtts
+from trainers.gpt_train import train_gpt
+from trainers.xtts_config import XttsConfig
+from trainers.xtts import Xtts
 
 class TrainingOutput(BaseModel):
     weights: Path
