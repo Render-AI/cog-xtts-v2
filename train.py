@@ -170,8 +170,8 @@ if __name__ == "__main__":
 # Implement Gradio Demo as Cog training script
 def train(
         param: str,
-        out_path: Input('out_path', default="/tmp"),
-        upload_file: File('upload_file'),
+        out_path: Input('out_path', default="/tmp/xtts_ft"),
+        upload_file: File('upload_file', default='female.wav'),
         lang: str = Input(
             description="Language of the training data",
             choices=["en", "es", "fr", "de", "it", "pt", "pl", "tr",
