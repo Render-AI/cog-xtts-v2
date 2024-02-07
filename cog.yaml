@@ -8,7 +8,7 @@ build:
   python_packages:
     - "git+https://github.com/coqui-ai/TTS.git"
     - "vocos"
-    - "voicefixer2"
+    - "git+https://github.com/Render-AI/voicefixer2.git"
     - "pydub"          
     - "librosa"
     - "numpy"    
