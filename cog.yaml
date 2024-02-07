@@ -20,4 +20,3 @@ build:
     - echo 'Setting up XTTS...'
 
 predict: "predict.py:Predictor"
-train: "train.py:train"
