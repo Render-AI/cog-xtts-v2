@@ -63,7 +63,7 @@ class Predictor(BasePredictor):
         ),    
         output_top_p: float = Input(
             description="Higher value produces more unexpected outputs.",
-            ge=1, # GE = min value (Greater than, or Equal to)            
+            le=1, # LE = max value (Less than, or Equal to)            
             default=0.5,            
         ),   
         gpt_cond_len:  float = Input(
